@@ -1,0 +1,191 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "copy-paths",
+  "description": "Search files, folders, browser history and agent sessions, and copy a path, URL or session name",
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "author": "hyperfocus1337",
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build -e dist",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test test/"
+  },
+  "dependencies": {
+    "@raycast/api": "^2.10.1",
+    "@raycast/utils": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "typescript": "^5.9.3"
+  },
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "copy-paths",
+      "title": "Copy Paths",
+      "description": "Search files and folders under the root folders and copy a path",
+      "mode": "view"
+    },
+    {
+      "name": "copy-file-paths",
+      "title": "Copy File Paths",
+      "description": "Search files under the root folders and copy a path",
+      "mode": "view"
+    },
+    {
+      "name": "copy-folder-paths",
+      "title": "Copy Folder Paths",
+      "description": "Search folders under the root folders and copy a path",
+      "mode": "view"
+    },
+    {
+      "name": "copy-urls",
+      "title": "Copy Browser URLs",
+      "description": "Search the Edge and Brave history and copy a URL",
+      "mode": "view"
+    },
+    {
+      "name": "copy-sessions",
+      "title": "Copy Agent Sessions",
+      "description": "Search the claude, codex, pi and omp sessions on this Mac and in the containers, and copy a name, id, resume command or folder",
+      "mode": "view"
+    },
+    {
+      "name": "manage-root-folders",
+      "title": "Manage Root Folders",
+      "description": "Add and remove the folders that Copy Paths searches",
+      "mode": "view"
+    },
+    {
+      "name": "manage-exclusions",
+      "title": "Manage Exclusions",
+      "description": "Turn on, turn off, add and delete the patterns that Copy Paths does not index",
+      "mode": "view"
+    },
+    {
+      "name": "set-shift-return-paste",
+      "title": "Set Shift+Return Paste",
+      "description": "Choose what Shift+Return pastes in Copy Paths",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "historyEdge",
+      "type": "checkbox",
+      "required": false,
+      "title": "Browser History",
+      "label": "Microsoft Edge",
+      "description": "Search the history of all Edge profiles",
+      "default": true
+    },
+    {
+      "name": "historyBrave",
+      "type": "checkbox",
+      "required": false,
+      "title": "",
+      "label": "Brave",
+      "description": "Search the history of all Brave profiles",
+      "default": true
+    },
+    {
+      "name": "historyDays",
+      "type": "textfield",
+      "required": false,
+      "title": "History Days",
+      "description": "Search the visits of the last number of days. 0 searches all history.",
+      "default": "90"
+    },
+    {
+      "name": "composeFile",
+      "type": "file",
+      "required": false,
+      "title": "Compose File",
+      "description": "The Docker Compose file whose bind mounts under /workspaces give the devcontainer path of a file. Empty turns off the devcontainer path."
+    },
+    {
+      "name": "sessionContainers",
+      "type": "textfield",
+      "required": false,
+      "title": "Session Containers",
+      "description": "The Docker containers whose agent sessions to show, separated by commas. name=label sets the label that the list shows.",
+      "default": ""
+    },
+    {
+      "name": "sessionUser",
+      "type": "textfield",
+      "required": false,
+      "title": "Container User",
+      "description": "The user that runs the agents in the containers. Empty uses the default user of the container.",
+      "default": ""
+    },
+    {
+      "name": "sessionDays",
+      "type": "textfield",
+      "required": false,
+      "title": "Session Days",
+      "description": "Show the sessions whose log changed in the last number of days. 0 shows all sessions.",
+      "default": "14"
+    },
+    {
+      "name": "sessionName",
+      "type": "dropdown",
+      "required": false,
+      "title": "Session Name",
+      "description": "Which text names a session in the list and on the clipboard. A set name is one that you gave with /rename or /name, a cmux title that of the cmux terminal where the agent runs now, and an agent title one that the agent made. The README lists the source for each agent. A session without such a text is not in the list.",
+      "default": "name,cmuxTitle,title,prompt",
+      "data": [
+        {
+          "title": "Set name, else cmux title, else agent title, else first prompt",
+          "value": "name,cmuxTitle,title,prompt"
+        },
+        {
+          "title": "Set name, else cmux title, else agent title",
+          "value": "name,cmuxTitle,title"
+        },
+        {
+          "title": "Set name, else cmux title, else first prompt",
+          "value": "name,cmuxTitle,prompt"
+        },
+        {
+          "title": "Set name, else agent title, else first prompt",
+          "value": "name,title,prompt"
+        },
+        {
+          "title": "Set name, else agent title",
+          "value": "name,title"
+        },
+        {
+          "title": "Set name, else first prompt",
+          "value": "name,prompt"
+        },
+        {
+          "title": "Only set names",
+          "value": "name"
+        }
+      ]
+    },
+    {
+      "name": "sessionEmpty",
+      "type": "dropdown",
+      "required": false,
+      "title": "Empty Session Search",
+      "description": "What Copy Agent Sessions shows with an empty search.",
+      "default": "newest",
+      "data": [
+        {
+          "title": "Newest sessions",
+          "value": "newest"
+        },
+        {
+          "title": "Recently copied sessions",
+          "value": "recent"
+        }
+      ]
+    }
+  ],
+  "title": "Copy Ref"
+}
